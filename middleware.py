@@ -6,7 +6,16 @@ from db_manager import get_company_db
 
 def inject_company_db():
     """
-    Extract company name from JWT and attach DB instance to request context.
+    Middleware responsible for injecting the correct MongoDB instance
+    into the Flask 'g' context based on the company encoded in the JWT.
+
+    - Verifies JWT validity
+    - Extracts company name from the token
+    - Fetches company-specific DB
+    - Makes DB available for the request lifecycle
+
+    Raises:
+        Exception: If token is invalid or company is missing.
     """
     claims = get_jwt()
     company = claims["company"]

@@ -7,6 +7,19 @@ product_bp = Blueprint("products", __name__)
 @product_bp.post("/add-product")
 @jwt_required()
 def add_product():
+    """
+    Adds a new product to the authenticated company's database.
+
+    Expected JSON body:
+        {
+            "name": "Product Name",
+            "description": "Product Description",
+            "image_url": "http://example.com/image.png"
+        }
+
+    Returns:
+        JSON message confirming product insertion.
+    """
     data = request.json
     product = {
         "name": data["name"],

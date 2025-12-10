@@ -19,6 +19,19 @@ USERS = {
 
 @auth_bp.post("/login")
 def login():
+    """
+    Authenticates a user and generates a JWT token.
+
+    Expected JSON body:
+        {
+            "username": "aadil",
+            "password": "1234"
+        }
+
+    Returns:
+        JSON response containing access token and HTTP status code 200.
+        Returns 401 if credentials are invalid.
+    """
     data = request.json
     username = data["username"]
     password = data["password"]
